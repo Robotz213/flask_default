@@ -9,13 +9,13 @@ def create_app(config_name=None):
     if config_name is None:
         config_name = os.environ.get("FLASK_ENV", "development").capitalize() + "Config"
 
-    from flask import conf
+    from app import conf
 
     config_class = getattr(conf, config_name, conf.DevelopmentConfig)
     app.config.from_object(config_class)
 
     # Importa e registra blueprints de rotas
-    from flask.routes import bp as routes_bp
+    from app.routes import bp as routes_bp
 
     app.register_blueprint(routes_bp)
 
